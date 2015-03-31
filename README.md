@@ -22,9 +22,9 @@ impl<'a, Args, Result> FnOnce<Args, Result> for Box<FnBox<Args, Result> + 'a> { 
 ## Usage
 
 ```rust
-let hello: Box<FnBox()> = move |:| { println!("hello world!") };
+let hello: Box<FnBox()> = Box::new(move || { println!("hello world!") });
 hello();
 
-let plus_one: Box<FnBox(_) -> _> = move |:x: uint| { x + 1 };
+let plus_one: Box<FnBox(_) -> _> = Box::new(move |x: i32| { x + 1 });
 assert_eq!(plus_one.call_box((3,)), 4);
 ```
